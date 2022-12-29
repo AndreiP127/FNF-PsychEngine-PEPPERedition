@@ -24,7 +24,7 @@ otherwise, you can delete the "VIDEOS_ALLOWED" Line on Project.xml
 * RiverOaken - Artist
 * Yoshubs - Assistant Programmer
 
-### Psych Special Thanks
+### Special Thanks
 * bbpanzu - Ex-Programmer
 * shubs - New Input System
 * SqirraRNG - Crash Handler and Base code for Chart Editor's Waveform
