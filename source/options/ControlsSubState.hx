@@ -41,6 +41,10 @@ class ControlsSubState extends MusicBeatSubstate {
 		['Up', 'note_up'],
 		['Right', 'note_right'],
 		[''],
+		['TAUNT'],
+		[''],
+		['Peace', 'peace_sign'],
+		[''],
 		['UI'],
 		['Left', 'ui_left'],
 		['Down', 'ui_down'],
@@ -51,15 +55,18 @@ class ControlsSubState extends MusicBeatSubstate {
 		['Accept', 'accept'],
 		['Back', 'back'],
 		['Pause', 'pause'],
+		['FLL-SCRN', 'ui_fullscreen'],
 		[''],
 		['VOLUME'],
 		['Mute', 'volume_mute'],
 		['Up', 'volume_up'],
 		['Down', 'volume_down'],
 		[''],
+		#if debug
 		['DEBUG'],
 		['Key 1', 'debug_1'],
 		['Key 2', 'debug_2']
+		#end
 	];
 
 	private var grpOptions:FlxTypedGroup<Alphabet>;
@@ -131,6 +138,9 @@ class ControlsSubState extends MusicBeatSubstate {
 				close();
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 			}
+
+			if (controls.FULLSCREEN)
+				FlxG.fullscreen = !FlxG.fullscreen;
 
 			if(controls.ACCEPT && nextAccept <= 0) {
 				if(optionShit[curSelected][0] == defaultKey) {

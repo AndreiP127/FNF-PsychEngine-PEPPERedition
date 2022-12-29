@@ -210,6 +210,9 @@ class NoteOffsetState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
+		if (controls.FULLSCREEN)
+			FlxG.fullscreen = !FlxG.fullscreen;
+			
 		var addNum:Int = 1;
 		if(FlxG.keys.pressed.SHIFT) addNum = 10;
 

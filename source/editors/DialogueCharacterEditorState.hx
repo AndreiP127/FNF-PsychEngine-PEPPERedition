@@ -678,6 +678,9 @@ class DialogueCharacterEditorState extends MusicBeatState
 				transitioning = true;
 			}
 
+			if (controls.FULLSCREEN)
+				FlxG.fullscreen = !FlxG.fullscreen;
+
 			ghostLoop.setPosition(character.x, character.y);
 			ghostIdle.setPosition(character.x, character.y);
 			hudGroup.x = mainGroup.x;

@@ -1,0 +1,21 @@
+{
+	"songs": [
+		["", "", [165, 0, 77]]
+	],
+
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"weekBackground": "storydiv",
+
+	"storyName": "",
+	"weekBefore": "tutorial",
+	"weekName": "",
+	"startUnlocked": true,
+	"weekDivisory": true,
+
+	"hideStoryMode": false,
+	"hideFreeplay": true
+}

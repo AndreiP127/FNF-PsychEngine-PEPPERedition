@@ -44,6 +44,7 @@ class WeekEditorState extends MusicBeatState
 	var grpWeekCharacters:FlxTypedGroup<MenuCharacter>;
 	var weekThing:MenuItem;
 	var missingFileText:FlxText;
+	var tracksSprite:FlxSprite;
 
 	var weekFile:WeekFile = null;
 	public function new(weekFile:WeekFile = null)
@@ -99,7 +100,7 @@ class WeekEditorState extends MusicBeatState
 		add(bgSprite);
 		add(grpWeekCharacters);
 
-		var tracksSprite:FlxSprite = new FlxSprite(FlxG.width * 0.07, bgSprite.y + 435).loadGraphic(Paths.image('Menu_Tracks'));
+		tracksSprite = new FlxSprite(FlxG.width * 0.07, bgSprite.y + 435).loadGraphic(Paths.image('Menu_Tracks'));
 		tracksSprite.antialiasing = ClientPrefs.globalAntialiasing;
 		add(tracksSprite);
 
@@ -204,6 +205,7 @@ class WeekEditorState extends MusicBeatState
 		hideCheckbox.callback = function()
 		{
 			weekFile.hideStoryMode = hideCheckbox.checked;
+			weekThing.alpha = 0.4 + 0.6 * (!hideCheckbox.checked ? 1 : 0);
 		};
 
 		tab_group.add(new FlxText(songsInputText.x, songsInputText.y - 18, 0, 'Songs:'));
@@ -230,6 +232,7 @@ class WeekEditorState extends MusicBeatState
 	var difficultiesInputText:FlxUIInputText;
 	var lockedCheckbox:FlxUICheckBox;
 	var hiddenUntilUnlockCheckbox:FlxUICheckBox;
+	var weekDivisory:FlxUICheckBox;
 
 	function addOtherUI() {
 		var tab_group = new FlxUI(null, UI_box);
@@ -247,6 +250,7 @@ class WeekEditorState extends MusicBeatState
 		hiddenUntilUnlockCheckbox.callback = function()
 		{
 			weekFile.hiddenUntilUnlocked = hiddenUntilUnlockCheckbox.checked;
+			weekThing.alpha = 0.4 + 0.6 * (!hiddenUntilUnlockCheckbox.checked ? 1 : 0);
 		};
 		hiddenUntilUnlockCheckbox.alpha = 0.4;
 
@@ -255,10 +259,20 @@ class WeekEditorState extends MusicBeatState
 
 		difficultiesInputText = new FlxUIInputText(10, weekBeforeInputText.y + 60, 200, '', 8);
 		blockPressWhileTypingOn.push(difficultiesInputText);
+
+		weekDivisory = new FlxUICheckBox(10, 300, null, null, "Week Divisory", 100);
+		weekDivisory.callback = function()
+		{
+			weekFile.weekDivisory = !weekDivisory.checked;
+			tracksSprite.visible = !weekDivisory.checked;
+			txtWeekTitle.visible = !weekDivisory.checked;
+			txtTracklist.visible = !weekDivisory.checked;
+		};
 		
 		tab_group.add(new FlxText(weekBeforeInputText.x, weekBeforeInputText.y - 28, 0, 'Week File name of the Week you have\nto finish for Unlocking:'));
 		tab_group.add(new FlxText(difficultiesInputText.x, difficultiesInputText.y - 20, 0, 'Difficulties:'));
 		tab_group.add(new FlxText(difficultiesInputText.x, difficultiesInputText.y + 20, 0, 'Default difficulties are "Easy, Normal, Hard"\nwithout quotes.'));
+		tab_group.add(weekDivisory);
 		tab_group.add(weekBeforeInputText);
 		tab_group.add(difficultiesInputText);
 		tab_group.add(hiddenUntilUnlockCheckbox);
@@ -449,6 +463,8 @@ class WeekEditorState extends MusicBeatState
 				MusicBeatState.switchState(new editors.MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 			}
+			if (controls.FULLSCREEN)
+				FlxG.fullscreen = !FlxG.fullscreen;
 		}
 
 		super.update(elapsed);

@@ -144,6 +144,9 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			changeSelection(1);
 		}
 
+		if (controls.FULLSCREEN)
+			FlxG.fullscreen = !FlxG.fullscreen;
+			
 		if (controls.BACK) {
 			close();
 			FlxG.sound.play(Paths.sound('cancelMenu'));

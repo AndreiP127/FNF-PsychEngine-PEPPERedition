@@ -1,5 +1,7 @@
 package;
 
+import editors.CharacterEditorState;
+import editors.ChartingState;
 import Controls.Control;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -19,8 +21,13 @@ class PauseSubState extends MusicBeatSubstate
 {
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
 
+	public static var goToOptions:Bool = false;
+	public static var goBack:Bool = false;
+
 	var menuItems:Array<String> = [];
-	var menuItemsOG:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Exit to menu'];
+	var menuItemsOG:Array<String> = ['Resume', 'Restart Song', 'Options', 'Exit to menu'];
+	var menuOptions:Array<String> = ['Toggle Fullscreen', 'Change Difficulty', #if debug 'Toggle Charting Mode', #end 'BACK'];
+	var menuCharting:Array<String> = ['Toggle Botplay', 'Toggle Practice Mode', 'End Song', 'Chart Editor', 'Character Editor', 'Leave Charting Mode', 'BACK'];
 	var difficultyChoices = [];
 	var curSelected:Int = 0;
 
@@ -36,21 +43,19 @@ class PauseSubState extends MusicBeatSubstate
 	public function new(x:Float, y:Float)
 	{
 		super();
-		if(CoolUtil.difficulties.length < 2) menuItemsOG.remove('Change Difficulty'); //No need to change difficulty if there is only one!
+		if(CoolUtil.difficulties.length < 2 && PlayState.isStoryMode)
+			menuOptions.remove('Change Difficulty'); //No need to change difficulty if there is only one!
 
 		if(PlayState.chartingMode)
 		{
-			menuItemsOG.insert(2, 'Leave Charting Mode');
-			
 			var num:Int = 0;
 			if(!PlayState.instance.startingSong)
 			{
 				num = 1;
-				menuItemsOG.insert(3, 'Skip Time');
+				menuCharting.insert(3, 'Skip Time');
 			}
-			menuItemsOG.insert(3 + num, 'End Song');
-			menuItemsOG.insert(4 + num, 'Toggle Practice Mode');
-			menuItemsOG.insert(5 + num, 'Toggle Botplay');
+			menuItemsOG.insert(3 + num, 'Charting Mode');
+			menuOptions.remove('Toggle Charting Mode');
 		}
 		menuItems = menuItemsOG;
 
@@ -58,7 +63,7 @@ class PauseSubState extends MusicBeatSubstate
 			var diff:String = '' + CoolUtil.difficulties[i];
 			difficultyChoices.push(diff);
 		}
-		difficultyChoices.push('BACK');
+		difficultyChoices.push('BACK TO OPTIONS');
 
 
 		pauseMusic = new FlxSound();
@@ -150,6 +155,9 @@ class PauseSubState extends MusicBeatSubstate
 		var downP = controls.UI_DOWN_P;
 		var accepted = controls.ACCEPT;
 
+		if (controls.FULLSCREEN)
+			FlxG.fullscreen = !FlxG.fullscreen;
+			
 		if (upP)
 		{
 			changeSelection(-1);
@@ -214,19 +222,44 @@ class PauseSubState extends MusicBeatSubstate
 			{
 				case "Resume":
 					close();
+
 				case 'Change Difficulty':
 					menuItems = difficultyChoices;
 					deleteSkipTimeText();
 					regenMenu();
+
+				case 'Charting Mode':
+					menuItems = menuCharting;
+					regenMenu();
+
+				case 'Options':
+					menuItems = menuOptions;
+					regenMenu();
+
+				case 'BACK':
+					menuItems = menuItemsOG;
+					regenMenu();
+
+				case 'BACK TO OPTIONS':
+					menuItems = menuOptions;
+					regenMenu();
+
 				case 'Toggle Practice Mode':
 					PlayState.instance.practiceMode = !PlayState.instance.practiceMode;
 					PlayState.changedDifficulty = true;
 					practiceText.visible = PlayState.instance.practiceMode;
+
 				case "Restart Song":
 					restartSong();
+
 				case "Leave Charting Mode":
 					restartSong();
 					PlayState.chartingMode = false;
+
+				case "Toggle Charting Mode":
+					restartSong();
+					PlayState.chartingMode = true;
+
 				case 'Skip Time':
 					if(curTime < Conductor.songPosition)
 					{
@@ -245,12 +278,29 @@ class PauseSubState extends MusicBeatSubstate
 				case "End Song":
 					close();
 					PlayState.instance.finishSong(true);
+
+				case 'Character Editor':
+					persistentUpdate = false;
+					PlayState.cancelMusicFadeTween();
+					MusicBeatState.switchState(new CharacterEditorState());
+					PlayState.chartingMode = true;
+
+				case 'Chart Editor':
+					persistentUpdate = false;
+					PlayState.cancelMusicFadeTween();
+					MusicBeatState.switchState(new ChartingState());
+					PlayState.chartingMode = true;
+
+				case 'Toggle Fullscreen':
+					FlxG.fullscreen = !FlxG.fullscreen;
+
 				case 'Toggle Botplay':
 					PlayState.instance.cpuControlled = !PlayState.instance.cpuControlled;
 					PlayState.changedDifficulty = true;
 					PlayState.instance.botplayTxt.visible = PlayState.instance.cpuControlled;
 					PlayState.instance.botplayTxt.alpha = 1;
 					PlayState.instance.botplaySine = 0;
+
 				case "Exit to menu":
 					PlayState.deathCounter = 0;
 					PlayState.seenCutscene = false;

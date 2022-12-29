@@ -87,6 +87,9 @@ class MasterEditorMenu extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
+		if (controls.FULLSCREEN)
+			FlxG.fullscreen = !FlxG.fullscreen;
+		
 		if (controls.UI_UP_P)
 		{
 			changeSelection(-1);

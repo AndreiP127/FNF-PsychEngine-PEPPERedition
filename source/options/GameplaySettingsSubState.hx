@@ -70,9 +70,17 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
-		var option:Option = new Option('Disable Reset Button',
+		//Just disable it in Controls Options. ~ Andrei_P
+		/*var option:Option = new Option('Disable Reset Button',
 			"If checked, pressing Reset won't do anything.",
 			'noReset',
+			'bool',
+			false);
+		addOption(option);*/
+
+		var option:Option = new Option('Hide Outdated Message',
+			"If checked, the Outdated Message won't pop up when the game boots up if there's an new update available.",
+			'disOutdated',
 			'bool',
 			false);
 		addOption(option);

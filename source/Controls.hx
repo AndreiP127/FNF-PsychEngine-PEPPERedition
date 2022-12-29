@@ -42,6 +42,8 @@ enum abstract Action(String) to String from String
 	var BACK = "back";
 	var PAUSE = "pause";
 	var RESET = "reset";
+	var FULLSCREEN = "ui_fullscreen";
+	var PEACE = "peace_sign";
 }
 #else
 @:enum
@@ -75,6 +77,8 @@ abstract Action(String) to String from String
 	var BACK = "back";
 	var PAUSE = "pause";
 	var RESET = "reset";
+	var FULLSCREEN = "ui_fullscreen";
+	var PEACE = "peace_sign";
 }
 #end
 
@@ -103,6 +107,8 @@ enum Control
 	ACCEPT;
 	BACK;
 	PAUSE;
+	FULLSCREEN;
+	PEACE;
 }
 
 enum KeyboardScheme
@@ -147,6 +153,8 @@ class Controls extends FlxActionSet
 	var _back = new FlxActionDigital(Action.BACK);
 	var _pause = new FlxActionDigital(Action.PAUSE);
 	var _reset = new FlxActionDigital(Action.RESET);
+	var _fullscreen = new FlxActionDigital(Action.FULLSCREEN);
+	var _peace = new FlxActionDigital(Action.PEACE);
 
 	#if (haxe >= "4.0.0")
 	var byName:Map<String, FlxActionDigital> = [];
@@ -297,6 +305,16 @@ class Controls extends FlxActionSet
 	inline function get_RESET()
 		return _reset.check();
 
+	public var FULLSCREEN(get, never):Bool;
+
+	inline function get_FULLSCREEN()
+		return _fullscreen.check();
+
+	public var PEACE(get, never):Bool;
+
+	inline function get_PEACE()
+		return _peace.check();
+
 	#if (haxe >= "4.0.0")
 	public function new(name, scheme = None)
 	{
@@ -330,6 +348,8 @@ class Controls extends FlxActionSet
 		add(_back);
 		add(_pause);
 		add(_reset);
+		add(_fullscreen);
+		add(_peace);
 
 		for (action in digitalActions)
 			byName[action.name] = action;
@@ -369,6 +389,8 @@ class Controls extends FlxActionSet
 		add(_back);
 		add(_pause);
 		add(_reset);
+		add(_fullscreen);
+		add(_peace);
 
 		for (action in digitalActions)
 			byName[action.name] = action;
@@ -426,6 +448,8 @@ class Controls extends FlxActionSet
 			case BACK: _back;
 			case PAUSE: _pause;
 			case RESET: _reset;
+			case FULLSCREEN: _fullscreen;
+			case PEACE: _peace;
 		}
 	}
 
@@ -485,6 +509,10 @@ class Controls extends FlxActionSet
 				func(_pause, JUST_PRESSED);
 			case RESET:
 				func(_reset, JUST_PRESSED);
+			case FULLSCREEN:
+				func(_fullscreen, JUST_PRESSED);
+			case PEACE:
+				func(_peace, JUST_PRESSED);
 		}
 	}
 
@@ -653,6 +681,8 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.BACK, keysMap.get('back'));
 				inline bindKeys(Control.PAUSE, keysMap.get('pause'));
 				inline bindKeys(Control.RESET, keysMap.get('reset'));
+				inline bindKeys(Control.FULLSCREEN, keysMap.get('ui_fullscreen'));
+				inline bindKeys(Control.PEACE, keysMap.get('peace_sign'));
 			case Duo(true):
 				inline bindKeys(Control.UI_UP, [W]);
 				inline bindKeys(Control.UI_DOWN, [S]);
@@ -666,6 +696,8 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.BACK, [H, X]);
 				inline bindKeys(Control.PAUSE, [ONE]);
 				inline bindKeys(Control.RESET, [R]);
+				inline bindKeys(Control.FULLSCREEN, [F11]);
+				inline bindKeys(Control.PEACE, [V]);
 			case Duo(false):
 				inline bindKeys(Control.UI_UP, [FlxKey.UP]);
 				inline bindKeys(Control.UI_DOWN, [FlxKey.DOWN]);
@@ -679,6 +711,8 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.BACK, [P]);
 				inline bindKeys(Control.PAUSE, [ENTER]);
 				inline bindKeys(Control.RESET, [BACKSPACE]);
+				inline bindKeys(Control.FULLSCREEN, [F11]);
+				inline bindKeys(Control.PEACE, [V]);
 			case None: // nothing
 			case Custom: // nothing
 		}
@@ -698,6 +732,8 @@ class Controls extends FlxActionSet
 				bindKeys(Control.BACK, [BACKSPACE, ESCAPE]);
 				bindKeys(Control.PAUSE, [P, ENTER, ESCAPE]);
 				bindKeys(Control.RESET, [R]);
+				bindKeys(Control.FULLSCREEN, [F11]);
+				bindKeys(Control.PEACE, [V]);
 			case Duo(true):
 				bindKeys(Control.UI_UP, [W]);
 				bindKeys(Control.UI_DOWN, [S]);
@@ -711,6 +747,8 @@ class Controls extends FlxActionSet
 				bindKeys(Control.BACK, [H, X]);
 				bindKeys(Control.PAUSE, [ONE]);
 				bindKeys(Control.RESET, [R]);
+				bindKeys(Control.FULLSCREEN, [F11]);
+				bindKeys(Control.PEACE, [V]);
 			case Duo(false):
 				bindKeys(Control.UI_UP, [FlxKey.UP]);
 				bindKeys(Control.UI_DOWN, [FlxKey.DOWN]);
@@ -724,6 +762,8 @@ class Controls extends FlxActionSet
 				bindKeys(Control.BACK, [P]);
 				bindKeys(Control.PAUSE, [ENTER]);
 				bindKeys(Control.RESET, [BACKSPACE]);
+				bindKeys(Control.FULLSCREEN, [F11]);
+				bindKeys(Control.PEACE, [V]);
 			case None: // nothing
 			case Custom: // nothing
 		}

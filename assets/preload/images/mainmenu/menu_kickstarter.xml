@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="menu_kickstarter.png">
+    <SubTexture name="kickstarter white0000" x="0" y="0" width="838" height="216" frameX="0" frameY="0" frameWidth="840" frameHeight="218" />
+    <SubTexture name="kickstarter white0001" x="0" y="216" width="836" height="216" frameX="0" frameY="0" frameWidth="840" frameHeight="218" />
+    <SubTexture name="kickstarter white0002" x="838" y="0" width="840" height="206" frameX="0" frameY="-6" frameWidth="840" frameHeight="218" />
+    <SubTexture name="kickstarter basic0000" x="0" y="432" width="559" height="139" frameX="-2" frameY="0" frameWidth="562" frameHeight="141" />
+    <SubTexture name="kickstarter basic0001" x="559" y="432" width="559" height="139" frameX="-2" frameY="0" frameWidth="562" frameHeight="141" />
+    <SubTexture name="kickstarter basic0002" x="838" y="206" width="559" height="140" frameX="-2" frameY="0" frameWidth="562" frameHeight="141" />
+</TextureAtlas>

@@ -39,6 +39,9 @@ class OutdatedState extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		if(!leftState) {
+			if (controls.FULLSCREEN)
+				FlxG.fullscreen = !FlxG.fullscreen;
+				
 			if (controls.ACCEPT) {
 				leftState = true;
 				CoolUtil.browserLoad("https://github.com/ShadowMario/FNF-PsychEngine/releases");

@@ -360,6 +360,9 @@ class DialogueEditorState extends MusicBeatState
 				FlxG.sound.playMusic(Paths.music('freakyMenu'), 1);
 				transitioning = true;
 			}
+			if (controls.FULLSCREEN)
+				FlxG.fullscreen = !FlxG.fullscreen;
+			
 			var negaMult:Array<Int> = [1, -1];
 			var controlAnim:Array<Bool> = [FlxG.keys.justPressed.W, FlxG.keys.justPressed.S];
 			var controlText:Array<Bool> = [FlxG.keys.justPressed.D, FlxG.keys.justPressed.A];

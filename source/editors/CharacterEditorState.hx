@@ -1114,6 +1114,9 @@ class CharacterEditorState extends MusicBeatState
 		FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
 
 		if(!charDropDown.dropPanel.visible) {
+			if (controls.FULLSCREEN)
+				FlxG.fullscreen = !FlxG.fullscreen;
+			
 			if (FlxG.keys.justPressed.ESCAPE) {
 				if(goToPlayState) {
 					MusicBeatState.switchState(new PlayState());

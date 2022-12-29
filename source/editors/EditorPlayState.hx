@@ -324,6 +324,9 @@ class EditorPlayState extends MusicBeatState
 	public var noteKillOffset:Float = 350;
 	public var spawnTime:Float = 2000;
 	override function update(elapsed:Float) {
+		if (controls.FULLSCREEN)
+			//FlxG.fullscreen = !FlxG.fullscreen;
+			trace('Pause the game first, bruh');
 		if (FlxG.keys.justPressed.ESCAPE)
 		{
 			FlxG.sound.music.pause();

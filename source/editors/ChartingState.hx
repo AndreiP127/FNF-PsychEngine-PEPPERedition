@@ -1664,6 +1664,9 @@ class ChartingState extends MusicBeatState
 
 		if (!blockInput)
 		{
+			if (controls.FULLSCREEN)
+				FlxG.fullscreen = !FlxG.fullscreen;
+			
 			if (FlxG.keys.justPressed.ESCAPE)
 			{
 				autosaveSong();

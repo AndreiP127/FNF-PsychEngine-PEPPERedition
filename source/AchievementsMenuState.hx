@@ -77,6 +77,9 @@ class AchievementsMenuState extends MusicBeatState
 	override function update(elapsed:Float) {
 		super.update(elapsed);
 
+		if (controls.FULLSCREEN)
+			FlxG.fullscreen = !FlxG.fullscreen;
+
 		if (controls.UI_UP_P) {
 			changeSelection(-1);
 		}

@@ -93,6 +93,9 @@ class NotesSubState extends MusicBeatSubstate
 
 	var changingNote:Bool = false;
 	override function update(elapsed:Float) {
+		if (controls.FULLSCREEN)
+			FlxG.fullscreen = !FlxG.fullscreen;
+			
 		if(changingNote) {
 			if(holdTime < 0.5) {
 				if(controls.UI_LEFT_P) {

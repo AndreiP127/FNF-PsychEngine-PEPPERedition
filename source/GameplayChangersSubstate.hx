@@ -94,6 +94,11 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 
 		var option:GameplayOption = new GameplayOption('Botplay', 'botplay', 'bool', false);
 		optionsArray.push(option);
+
+		#if debug
+			var option:GameplayOption = new GameplayOption('Debug Botplay', 'debugbotplay', 'bool', false);
+			optionsArray.push(option);
+		#end
 	}
 
 	public function getOptionByName(name:String)
@@ -114,6 +119,22 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		bg.alpha = 0.6;
 		add(bg);
+
+		#if debug
+			if (PlayState.isStoryMode)
+				{
+					var storyText = new FlxText(FlxG.width * 0.7, 15, 0, "FOR DEBUG PURPOSES ONLY", 25);
+					storyText.setFormat("VCR OSD Mono", 25, FlxColor.WHITE, RIGHT);
+					add(storyText);
+				}
+		#else 
+			if (PlayState.isStoryMode)
+				{
+					var storyText = new FlxText(FlxG.width * 0.7, 15, 0, "You dirty cheater...", 25);
+					storyText.setFormat("VCR OSD Mono", 25, FlxColor.RED, RIGHT);
+					add(storyText);
+				}
+		#end
 
 		// avoids lagspikes while scrolling through menus!
 		grpOptions = new FlxTypedGroup<Alphabet>();
@@ -167,6 +188,9 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 	var holdValue:Float = 0;
 	override function update(elapsed:Float)
 	{
+		if (controls.FULLSCREEN)
+			FlxG.fullscreen = !FlxG.fullscreen;
+			
 		if (controls.UI_UP_P)
 		{
 			changeSelection(-1);

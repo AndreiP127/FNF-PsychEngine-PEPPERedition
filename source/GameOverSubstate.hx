@@ -87,6 +87,10 @@ class GameOverSubstate extends MusicBeatSubstate
 			endBullshit();
 		}
 
+		if (controls.FULLSCREEN)
+			//FlxG.fullscreen = !FlxG.fullscreen;
+			trace('Pause the game first, bruh');
+
 		if (controls.BACK)
 		{
 			FlxG.sound.music.stop();

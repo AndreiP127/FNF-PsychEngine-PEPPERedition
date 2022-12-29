@@ -290,6 +290,9 @@ class MenuCharacterEditorState extends MusicBeatState
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 			}
 
+			if (controls.FULLSCREEN)
+				FlxG.fullscreen = !FlxG.fullscreen;
+
 			var shiftMult:Int = 1;
 			if(FlxG.keys.pressed.SHIFT) shiftMult = 10;
 
