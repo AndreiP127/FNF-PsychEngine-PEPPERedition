@@ -113,7 +113,7 @@ class ModsMenuState extends MusicBeatState
 			{
 				if(!Paths.ignoreModFolders.contains(folder))
 				{
-					addToModsList([folder, true]); //i like it false by default. -bb //Well, i like it True! -Shadow
+					addToModsList([folder, true]); //i like it false by default. -bb //Well, i like it True! -Shadow //What about null? -Andrei_P
 				}
 			}
 		}

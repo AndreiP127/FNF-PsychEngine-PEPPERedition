@@ -36,7 +36,7 @@ class Main extends Sprite
 		initialState: TitleState, // initial game state
 		zoom: -1.0, // game state bounds
 		framerate: 60, // default framerate
-		skipSplash: true, // if the default flixel splash screen should be skipped
+		skipSplash: false, // if the default flixel splash screen should be skipped
 		startFullscreen: false // if the game should start at fullscreen mode
 	};
 
@@ -91,19 +91,27 @@ class Main extends Sprite
 		addChild(new FlxGame(game.width, game.height, game.initialState, #if (flixel < "5.0.0") game.zoom, #end game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
 
 		#if !mobile
-		fpsVar = new FPS(10, 3, 0xFFFFFF);
-		addChild(fpsVar);
-		Lib.current.stage.align = "tl";
-		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
-		if(fpsVar != null) {
-			fpsVar.visible = ClientPrefs.showFPS;
-		}
+			fpsVar = new FPS(10, 3, 0xFFFFFF);
+			addChild(fpsVar);
+			Lib.current.stage.align = "tl";
+			Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
+			if(fpsVar != null) {
+				fpsVar.visible = ClientPrefs.showFPS;
+			}
 		#end
 
+		/*#if html5
+			FlxG.autoPause = false;
+			FlxG.mouse.visible = false;
+		#end*/
+
 		#if html5
-		FlxG.autoPause = false;
-		FlxG.mouse.visible = false;
+			FlxG.mouse.visible = false;
 		#end
+
+		if (!ClientPrefs.autoPause) {
+			FlxG.autoPause = false;
+		}
 		
 		#if CRASH_HANDLER
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);

@@ -60,15 +60,22 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 			true); //Default value
 		addOption(option);
 
+		var option:Option = new Option('Automatic Pause',
+			"Game will freeze if you press somewhere else outside the game window. (You'll need to restart the game.)",
+			'autoPause',
+			'bool',
+			true);
+		addOption(option);
+
 		#if !html5 //Apparently other framerates isn't correctly supported on Browser? Probably it has some V-Sync shit enabled by default, idk
 		var option:Option = new Option('Framerate',
-			"Pretty self explanatory, isn't it?",
+		"Maximum amount of frames updated per second.", //You know that there are really stupid people out there, right? ~ Andrei_P
 			'framerate',
 			'int',
 			60);
 		addOption(option);
 
-		option.minValue = 60;
+		option.minValue = 24;
 		option.maxValue = 240;
 		option.displayFormat = '%v FPS';
 		option.onChange = onChangeFramerate;
