@@ -284,12 +284,14 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.cancelMusicFadeTween();
 					MusicBeatState.switchState(new CharacterEditorState());
 					PlayState.chartingMode = true;
+					openfl.Lib.application.window.title = "Friday Night Funkin'";
 
 				case 'Chart Editor':
 					persistentUpdate = false;
 					PlayState.cancelMusicFadeTween();
 					MusicBeatState.switchState(new ChartingState());
 					PlayState.chartingMode = true;
+					openfl.Lib.application.window.title = "Friday Night Funkin'";
 
 				case 'Toggle Fullscreen':
 					FlxG.fullscreen = !FlxG.fullscreen;

@@ -2398,6 +2398,7 @@ class PlayState extends MusicBeatState
 		}
 
 		#if desktop
+		openfl.Lib.application.window.title = ("Friday Night Funkin' - " + SONG.song + ' [' + storyDifficultyText + ']');
 		// Updating Discord Rich Presence (with Time Left)
 		DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), true, songLength);
 		#end
@@ -3090,6 +3091,7 @@ class PlayState extends MusicBeatState
 				paused = true;
 				cancelMusicFadeTween();
 				MusicBeatState.switchState(new CharacterEditorState(SONG.player2));
+				openfl.Lib.application.window.title = "Friday Night Funkin'";
 			}
 		#end
 		
@@ -3372,6 +3374,7 @@ class PlayState extends MusicBeatState
 
 		#if desktop
 		DiscordClient.changePresence("Chart Editor", null, null, true);
+		openfl.Lib.application.window.title = "Friday Night Funkin'";
 		#end
 	}
 
