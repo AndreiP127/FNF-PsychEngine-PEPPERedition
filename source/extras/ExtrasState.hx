@@ -1,4 +1,4 @@
-package options;
+package extras;
 
 #if desktop
 import Discord.DiscordClient;
@@ -27,27 +27,23 @@ import Controls;
 
 using StringTools;
 
-class OptionsState extends MusicBeatState
+class ExtrasState extends MusicBeatState
 {
-	var options:Array<String> = ['Controls', 'Adjust Delay and Combo', 'Graphics', 'Visuals and UI', 'Gameplay'];
-	private var grpOptions:FlxTypedGroup<Alphabet>;
+	var extras:Array<String> = ['Note Colors', #if debug 'Editor State', #end 'Links'];
+	private var grpExtras:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
 
 	function openSelectedSubstate(label:String) {
 		switch(label) {
 			case 'Note Colors':
-				openSubState(new options.NotesSubState());
-			case 'Controls':
-				openSubState(new options.ControlsSubState());
-			case 'Graphics':
-				openSubState(new options.GraphicsSettingsSubState());
-			case 'Visuals and UI':
-				openSubState(new options.VisualsUISubState());
-			case 'Gameplay':
-				openSubState(new options.GameplaySettingsSubState());
-			case 'Adjust Delay and Combo':
-				LoadingState.loadAndSwitchState(new options.NoteOffsetState());
+				openSubState(new options.NotesSubState()); // I prefer it being here. ~ Andrei_P
+			case 'Soundtrack':
+				trace('In progress, sorry.'); // This'll be a huge thing, holy shit how I wanted to know real coding... ~ Andrei_P
+			case 'Editor State':
+				LoadingState.loadAndSwitchState(new editors.MasterEditorMenu());
+			case 'Links':
+				LoadingState.loadAndSwitchState(new extras.LinksSubState()); // Supposed to be a SubState, but HaxeFlixel is a bitch. ~ Andrei_P
 		}
 	}
 
@@ -56,26 +52,26 @@ class OptionsState extends MusicBeatState
 
 	override function create() {
 		#if desktop
-		DiscordClient.changePresence("Options Menu", null);
+		DiscordClient.changePresence("Extras Menu", null);
 		#end
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		bg.color = 0xFFea71fd;
+		bg.color = 0xff35d396;
 		bg.updateHitbox();
 
 		bg.screenCenter();
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 
-		grpOptions = new FlxTypedGroup<Alphabet>();
-		add(grpOptions);
+		grpExtras = new FlxTypedGroup<Alphabet>();
+		add(grpExtras);
 
-		for (i in 0...options.length)
+		for (i in 0...extras.length)
 		{
-			var optionText:Alphabet = new Alphabet(0, 0, options[i], true);
-			optionText.screenCenter();
-			optionText.y += (100 * (i - (options.length / 2))) + 50;
-			grpOptions.add(optionText);
+			var extraText:Alphabet = new Alphabet(0, 0, extras[i], true);
+			extraText.screenCenter();
+			extraText.y += (100 * (i - (extras.length / 2))) + 50;
+			grpExtras.add(extraText);
 		}
 
 		selectorLeft = new Alphabet(0, 0, '>', true);
@@ -113,20 +109,20 @@ class OptionsState extends MusicBeatState
 		}
 
 		if (controls.ACCEPT) {
-			openSelectedSubstate(options[curSelected]);
+			openSelectedSubstate(extras[curSelected]);
 		}
 	}
 	
 	function changeSelection(change:Int = 0) {
 		curSelected += change;
 		if (curSelected < 0)
-			curSelected = options.length - 1;
-		if (curSelected >= options.length)
+			curSelected = extras.length - 1;
+		if (curSelected >= extras.length)
 			curSelected = 0;
 
 		var bullShit:Int = 0;
 
-		for (item in grpOptions.members) {
+		for (item in grpExtras.members) {
 			item.targetY = bullShit - curSelected;
 			bullShit++;
 

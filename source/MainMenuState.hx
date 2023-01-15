@@ -37,9 +37,11 @@ class MainMenuState extends MusicBeatState
 		'story_mode',
 		'freeplay',
 		'options',
+		'extras',
 		#if MODS_ALLOWED 'mods', #end
 		#if ACHIEVEMENTS_ALLOWED 'awards', #end
-		#if !switch 'donate', #end
+		//#if !switch 'donate', #end
+		//#if !switch 'kickstarter', #end
 		'credits'
 	];
 
@@ -259,19 +261,21 @@ class MainMenuState extends MusicBeatState
 										MusicBeatState.switchState(new CreditsState());
 									case 'options':
 										LoadingState.loadAndSwitchState(new options.OptionsState());
+									case 'extras':
+										LoadingState.loadAndSwitchState(new extras.ExtrasState());
 								}
 							});
 						}
 					});
 				}
 			}
-			#if (desktop && debug)
+			/*#if (desktop && debug)
 				else if (FlxG.keys.anyJustPressed(debugKeys))
 				{
 					selectedSomethin = true;
 					MusicBeatState.switchState(new MasterEditorMenu());
 				}
-			#end
+			#end*/
 		}
 
 		super.update(elapsed);
