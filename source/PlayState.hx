@@ -384,12 +384,30 @@ class PlayState extends MusicBeatState
 			FlxG.sound.music.stop();
 
 		// Gameplay settings
-		healthGain = ClientPrefs.getGameplaySetting('healthgain', 1);
-		healthLoss = ClientPrefs.getGameplaySetting('healthloss', 1);
-		instakillOnMiss = ClientPrefs.getGameplaySetting('instakill', false);
-		practiceMode = ClientPrefs.getGameplaySetting('practice', false);
-		cpuControlled = ClientPrefs.getGameplaySetting('botplay', false);
-		cpuControlledDebug = ClientPrefs.getGameplaySetting('debugbotplay', false);
+		#if !debug
+			if (isStoryMode) {
+				healthGain = 1;
+				healthLoss = 1;
+				instakillOnMiss = false;
+				practiceMode = false;
+				cpuControlled = false;
+				cpuControlledDebug = false;
+			} else {
+				healthGain = ClientPrefs.getGameplaySetting('healthgain', 1);
+				healthLoss = ClientPrefs.getGameplaySetting('healthloss', 1);
+				instakillOnMiss = ClientPrefs.getGameplaySetting('instakill', false);
+				practiceMode = ClientPrefs.getGameplaySetting('practice', false);
+				cpuControlled = ClientPrefs.getGameplaySetting('botplay', false);
+				cpuControlledDebug = ClientPrefs.getGameplaySetting('debugbotplay', false);
+			}
+		#else
+			healthGain = ClientPrefs.getGameplaySetting('healthgain', 1);
+			healthLoss = ClientPrefs.getGameplaySetting('healthloss', 1);
+			instakillOnMiss = ClientPrefs.getGameplaySetting('instakill', false);
+			practiceMode = ClientPrefs.getGameplaySetting('practice', false);
+			cpuControlled = ClientPrefs.getGameplaySetting('botplay', false);
+			cpuControlledDebug = ClientPrefs.getGameplaySetting('debugbotplay', false);
+		#end
 
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = new FlxCamera();
