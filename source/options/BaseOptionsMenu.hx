@@ -165,7 +165,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 				if(controls.ACCEPT)
 				{
 					FlxG.sound.play(Paths.sound('scrollMenu'));
-					curOption.setValue((curOption.getValue() == true) ? false : true);
+					curOption.setValue((curOption.getValue() == true) ? false : true); // Gotta save this template for later! ~ Andrei_P
 					curOption.change();
 					reloadCheckboxes();
 				}

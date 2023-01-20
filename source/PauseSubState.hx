@@ -279,6 +279,9 @@ class PauseSubState extends MusicBeatSubstate
 					close();
 					PlayState.instance.finishSong(true);
 
+				case "Controls":
+					openSubState(new options.ControlsSubState());
+
 				case 'Character Editor':
 					persistentUpdate = false;
 					PlayState.cancelMusicFadeTween();
