@@ -73,7 +73,7 @@ _____________________________________
   * Also there's the Background girls being spooky during the "Hey!" parts of the Instrumental
 
 ## Cool new Chart Editor changes and countless bug fixes
-![](https://github.com/ShadowMario/FNF-PsychEngine/blob/main/docs/img/chart.png?raw=true)
+![Charting](https://user-images.githubusercontent.com/88662698/213327231-f0d47500-3d8d-4c92-98ca-1ba796b83412.png)
 * You can now chart "Event" notes, which are bookmarks that trigger specific actions that usually were hardcoded on the vanilla version of the game.
 * Your song's BPM can now have decimal values
 * You can manually adjust a Note's strum time if you're really going for milisecond precision
@@ -86,24 +86,32 @@ _____________________________________
 * Working both for Source code modding and Downloaded builds!
 
 ## Story mode menu rework:
-![](https://i.imgur.com/UB2EKpV.png)
+![Story Mode](https://user-images.githubusercontent.com/88662698/213326798-1335f1e3-1b06-4d25-9573-504a310f6852.png)
 * Added a different BG to every song (less Tutorial)
-* All menu characters are now in individual spritesheets, makes modding it easier.
-
-## Credits menu
-![Screenshot_1](https://user-images.githubusercontent.com/44785097/144632635-f263fb22-b879-4d6b-96d6-865e9562b907.png)
-* You can add a head icon, name, description and a Redirect link for when the player presses Enter while the item is currently selected.
-
-## Awards/Achievements
-* The engine comes with 16 example achievements that you can mess with and learn how it works (Check Achievements.hx and search for "checkForAchievement" on PlayState.hx)
+* All menu characters are now in individual spritesheets, makes modding it easier
+* Added new Week Divisors to make sorting weeks better (especially for mods).
 
 ## Options menu:
-* You can change Note colors, Delay and Combo Offset, Controls and Preferences there.
+* You can change Delay and Combo Offset, Controls and Preferences there.
  * On Preferences you can toggle Downscroll, Middlescroll, Anti-Aliasing, Framerate, Low Quality, Note Splashes, Flashing Lights, etc.
+ 
+## Extras menu:
+![Extras](https://user-images.githubusercontent.com/88662698/213326670-ed57342b-6b6c-4cad-a3bc-8da63b8bc826.png)
+* Upcoming things to add here in progress.
+
+## Awards/Achievements
+![Awards](https://user-images.githubusercontent.com/88662698/213326235-58ee1657-9040-439f-b675-09a514a3bd1e.png)
+* The engine comes with 16 example achievements that you can mess with and learn how it works (Check Achievements.hx and search for "checkForAchievement" on PlayState.hx)
+
+## Credits menu
+![Credits](https://user-images.githubusercontent.com/88662698/213326187-07c00944-c6e4-4fc3-b9c4-079658c8da8a.png)
+* You can add a head icon, name, description and a Redirect link for when the player presses Enter while the item is currently selected.
 
 ## Other gameplay features:
 * When the enemy hits a note, their strum note also glows.
 * Lag doesn't impact the camera movement and player icon scaling anymore.
-* Some stuff based on Week 7's changes has been put in (Background colors on Freeplay, Note splashes)
+* Some stuff based on Week 7's changes has been put in (Background colors on Freeplay, Note splashes, WEEK 7 ITSELF)
 * You can reset your Score on Freeplay/Story Mode by pressing Reset button.
 * You can listen to a song or adjust Scroll Speed/Damage taken/etc. on Freeplay by pressing Space.
+* Fullscreen anywhere.
+* Gameplay changers for Freeplay.
