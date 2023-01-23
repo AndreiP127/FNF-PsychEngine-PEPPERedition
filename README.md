@@ -1,5 +1,5 @@
 # Friday Night Funkin' - Psych Engine: PEPPER Edition
-Engine originally used on [Mind Games Mod](https://gamebanana.com/mods/301107), intended to be a fix for the vanilla version's many issues while keeping the casual play aspect of it. Also aiming to be an easier alternative to newbie coders.
+[Psych Engine](https://github.com/ShadowMario/FNF-PsychEngine) was originally used on [Mind Games Mod](https://gamebanana.com/mods/301107), intended to be a fix for the vanilla version's many issues while keeping the casual play aspect of it. Also aiming to be an easier alternative to newbie coders.
 
 PEPPER Edition is just a fanmade version of Psych Engine with things I wanted to be added.
 
