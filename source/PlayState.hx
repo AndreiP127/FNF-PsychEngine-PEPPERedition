@@ -3072,9 +3072,32 @@ class PlayState extends MusicBeatState
 		if (controls.FULLSCREEN)
 			//FlxG.fullscreen = !FlxG.fullscreen;
 			trace('Pause the game first, bruh');
+			
+		#if BOYFRIEND_TAUNTS
+			if (controls.TAUNT_1)
+				boyfriend.playAnim('hey');
 
-		if (controls.PEACE)
-			boyfriend.playAnim('hey');
+			if (controls.TAUNT_2)
+				boyfriend.playAnim('hurt');
+
+			if (controls.TAUNT_3)
+				boyfriend.playAnim('scared');
+
+			if (controls.TAUNT_4)
+				boyfriend.playAnim('dodge');
+		#else
+			if (controls.TAUNT_1)
+				boyfriend.playAnim('taunt_1');
+
+			if (controls.TAUNT_2)
+				boyfriend.playAnim('taunt_2');
+
+			if (controls.TAUNT_3)
+				boyfriend.playAnim('taunt_3');
+
+			if (controls.TAUNT_4)
+				boyfriend.playAnim('taunt_4');
+		#end
 
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
 		// FlxG.watch.addQuick('VOLRight', vocals.amplitudeRight);
@@ -3111,7 +3134,9 @@ class PlayState extends MusicBeatState
 				paused = true;
 				cancelMusicFadeTween();
 				MusicBeatState.switchState(new CharacterEditorState(SONG.player2));
-				openfl.Lib.application.window.title = "Friday Night Funkin'";
+				#if desktop
+					openfl.Lib.application.window.title = "Psych Engine - PEPPER Edition";
+				#end
 			}
 		#end
 		

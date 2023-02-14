@@ -41,9 +41,19 @@ class ControlsSubState extends MusicBeatSubstate {
 		['Up', 'note_up'],
 		['Right', 'note_right'],
 		[''],
-		['TAUNT'],
+		['TAUNTS'],
 		[''],
-		['Peace', 'peace_sign'],
+		#if BOYFRIEND_TAUNTS
+		['Hey', 'taunt_1'],
+		['Hurt', 'taunt_2'],
+		['Scared', 'taunt_3'],
+		['Dodge', 'taunt_4'],
+		#else
+		['Taunt 1', 'taunt_1'],
+		['Taunt 2', 'taunt_2'],
+		['Taunt 3', 'taunt_3'],
+		['Taunt 4', 'taunt_4'],
+		#end
 		[''],
 		['UI'],
 		['Left', 'ui_left'],

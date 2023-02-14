@@ -1,5 +1,8 @@
 package;
 
+import options.OptionsState;
+import options.VisualsUISubState;
+import options.GameplaySettingsSubState;
 import editors.CharacterEditorState;
 import editors.ChartingState;
 import Controls.Control;
@@ -25,9 +28,15 @@ class PauseSubState extends MusicBeatSubstate
 	public static var goBack:Bool = false;
 
 	var menuItems:Array<String> = [];
+
 	var menuItemsOG:Array<String> = ['Resume', 'Restart Song', 'Options', 'Exit to menu'];
-	var menuOptions:Array<String> = ['Toggle Fullscreen', 'Change Difficulty', #if debug 'Toggle Charting Mode', #end 'BACK'];
+	var menuOptions:Array<String> = ['Toggle Fullscreen', 'Change Difficulty', 'Settings', #if debug 'Toggle Charting Mode', #end 'BACK'];
+	//var menuOptions:Array<String> = ['Change Difficulty', 'Controls Settings', 'Graphic Settings', 'Visuals and UI Settings', 'Gameplay Settings', #if debug 'Toggle Charting Mode', #end 'BACK'];
 	var menuCharting:Array<String> = ['Toggle Botplay', 'Toggle Practice Mode', 'End Song', 'Chart Editor', 'Character Editor', 'Leave Charting Mode', 'BACK'];
+
+	//var menuOptionsVisuals:Array<String> = ['Note Splashes', 'Hide HUD', 'Flashing Lights', 'Camera Zooms', 'Score Text Zoom on Hit', 'FPS Counter', 'Combo Stacking', 'BACK TO OPTIONS'];
+	//var menuOptionsGameplay:Array<String> = ['Controller Mode', 'Downscroll', 'Middlescroll', 'Opponent Notes', 'Ghost Tapping', 'Disable Reset Button', 'BACK TO OPTIONS'];
+
 	var difficultyChoices = [];
 	var curSelected:Int = 0;
 
@@ -220,45 +229,95 @@ class PauseSubState extends MusicBeatSubstate
 
 			switch (daSelected)
 			{
+				//Pause
 				case "Resume":
 					close();
 
-				case 'Change Difficulty':
-					menuItems = difficultyChoices;
-					deleteSkipTimeText();
+				case "Restart Song":
+					restartSong();
+
+				case 'Options':
+					menuItems = menuOptions;
 					regenMenu();
 
 				case 'Charting Mode':
 					menuItems = menuCharting;
 					regenMenu();
 
-				case 'Options':
-					menuItems = menuOptions;
+				case "Exit to menu":
+					PlayState.deathCounter = 0;
+					PlayState.seenCutscene = false;
+
+					WeekData.loadTheFirstEnabledMod();
+					if(PlayState.isStoryMode) {
+						MusicBeatState.switchState(new StoryMenuState());
+					} else {
+						MusicBeatState.switchState(new FreeplayState());
+					}
+					PlayState.cancelMusicFadeTween();
+					FlxG.sound.playMusic(Paths.music('freakyMenu'));
+					PlayState.changedDifficulty = false;
+					PlayState.chartingMode = false;
+
+				//Master Options
+				case 'Change Difficulty':
+					menuItems = difficultyChoices;
+					deleteSkipTimeText();
 					regenMenu();
+
+				case 'Settings':
+					PlayState.cancelMusicFadeTween();
+					FlxG.sound.playMusic(Paths.music('freakyMenu'));
+					LoadingState.loadAndSwitchState(new options.OptionsState());
+					OptionsState.goToPlayState = true;
+
+				case "Toggle Charting Mode":
+					restartSong();
+					PlayState.chartingMode = true;
 
 				case 'BACK':
 					menuItems = menuItemsOG;
 					regenMenu();
 
-				case 'BACK TO OPTIONS':
-					menuItems = menuOptions;
-					regenMenu();
-
+				//Charting Mode
+				case 'Toggle Botplay':
+					PlayState.instance.cpuControlled = !PlayState.instance.cpuControlled;
+					PlayState.changedDifficulty = true;
+					PlayState.instance.botplayTxt.visible = PlayState.instance.cpuControlled;
+					PlayState.instance.botplayTxt.alpha = 1;
+					PlayState.instance.botplaySine = 0;
+			
 				case 'Toggle Practice Mode':
 					PlayState.instance.practiceMode = !PlayState.instance.practiceMode;
 					PlayState.changedDifficulty = true;
 					practiceText.visible = PlayState.instance.practiceMode;
 
-				case "Restart Song":
-					restartSong();
+				case "End Song":
+					close();
+					PlayState.instance.finishSong(true);
+
+				case 'Chart Editor':
+					persistentUpdate = false;
+					PlayState.cancelMusicFadeTween();
+					MusicBeatState.switchState(new ChartingState());
+					PlayState.chartingMode = true;
+
+				case 'Character Editor':
+					persistentUpdate = false;
+					PlayState.cancelMusicFadeTween();
+					MusicBeatState.switchState(new CharacterEditorState(PlayState.SONG.player2));
+					PlayState.chartingMode = true;
+					#if desktop
+						openfl.Lib.application.window.title = "Psych Engine - PEPPER Edition";
+					#end
 
 				case "Leave Charting Mode":
 					restartSong();
 					PlayState.chartingMode = false;
 
-				case "Toggle Charting Mode":
-					restartSong();
-					PlayState.chartingMode = true;
+				case 'BACK TO OPTIONS':
+					menuItems = menuOptions;
+					regenMenu();
 
 				case 'Skip Time':
 					if(curTime < Conductor.songPosition)
@@ -275,51 +334,9 @@ class PauseSubState extends MusicBeatSubstate
 						}
 						close();
 					}
-				case "End Song":
-					close();
-					PlayState.instance.finishSong(true);
-
-				case "Controls":
-					openSubState(new options.ControlsSubState());
-
-				case 'Character Editor':
-					persistentUpdate = false;
-					PlayState.cancelMusicFadeTween();
-					MusicBeatState.switchState(new CharacterEditorState());
-					PlayState.chartingMode = true;
-					openfl.Lib.application.window.title = "Friday Night Funkin'";
-
-				case 'Chart Editor':
-					persistentUpdate = false;
-					PlayState.cancelMusicFadeTween();
-					MusicBeatState.switchState(new ChartingState());
-					PlayState.chartingMode = true;
-					openfl.Lib.application.window.title = "Friday Night Funkin'";
-
+				
 				case 'Toggle Fullscreen':
 					FlxG.fullscreen = !FlxG.fullscreen;
-
-				case 'Toggle Botplay':
-					PlayState.instance.cpuControlled = !PlayState.instance.cpuControlled;
-					PlayState.changedDifficulty = true;
-					PlayState.instance.botplayTxt.visible = PlayState.instance.cpuControlled;
-					PlayState.instance.botplayTxt.alpha = 1;
-					PlayState.instance.botplaySine = 0;
-
-				case "Exit to menu":
-					PlayState.deathCounter = 0;
-					PlayState.seenCutscene = false;
-
-					WeekData.loadTheFirstEnabledMod();
-					if(PlayState.isStoryMode) {
-						MusicBeatState.switchState(new StoryMenuState());
-					} else {
-						MusicBeatState.switchState(new FreeplayState());
-					}
-					PlayState.cancelMusicFadeTween();
-					FlxG.sound.playMusic(Paths.music('freakyMenu'));
-					PlayState.changedDifficulty = false;
-					PlayState.chartingMode = false;
 			}
 		}
 	}

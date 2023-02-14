@@ -1529,6 +1529,10 @@ class ChartingState extends MusicBeatState
 	var colorSine:Float = 0;
 	override function update(elapsed:Float)
 	{
+		#if desktop
+			openfl.Lib.application.window.title = ("Psych Engine - PEPPER Edition - " + currentSongName);
+		#end
+
 		curStep = recalculateSteps();
 
 		if(FlxG.sound.music.time < 0) {
@@ -1698,6 +1702,9 @@ class ChartingState extends MusicBeatState
 
 
 			if (FlxG.keys.justPressed.BACKSPACE) {
+				#if desktop
+					openfl.Lib.application.window.title = "Psych Engine - PEPPER Edition";
+				#end
 				PlayState.chartingMode = false;
 				MusicBeatState.switchState(new editors.MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));

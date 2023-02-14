@@ -103,6 +103,8 @@ class CreditsState extends MusicBeatState
 			['Andrei_P',			'andrei',			'Main programmer of PEPPER Edition',							'https://twitter.com/Andrei_P127',		'09BB00'],
 			[''],
 			['Cameos Featured'],
+			['Sr Pelo', 			'spooky',			"SPOOKY MONTH", 												'https://twitter.com/_SrPelo_', 		'D57E00'],
+			['Tom Fulp', 			'tankman',			"Ugh", 															'https://twitter.com/TomFulp', 			'B4B4B4'],
 			['Moawling', 			'moawling',			"Artist of Week 6", 											'https://twitter.com/moawko', 			'F28985'],
 			[''],
 			["Funkin' Crew"],

@@ -43,7 +43,10 @@ enum abstract Action(String) to String from String
 	var PAUSE = "pause";
 	var RESET = "reset";
 	var FULLSCREEN = "ui_fullscreen";
-	var PEACE = "peace_sign";
+	var TAUNT_1 = "taunt_1";
+	var TAUNT_2 = "taunt_2";
+	var TAUNT_3 = "taunt_3";
+	var TAUNT_4 = "taunt_4";
 }
 #else
 @:enum
@@ -78,7 +81,10 @@ abstract Action(String) to String from String
 	var PAUSE = "pause";
 	var RESET = "reset";
 	var FULLSCREEN = "ui_fullscreen";
-	var PEACE = "peace_sign";
+	var TAUNT_1 = "taunt_1";
+	var TAUNT_2 = "taunt_2";
+	var TAUNT_3 = "taunt_3";
+	var TAUNT_4 = "taunt_4";
 }
 #end
 
@@ -108,7 +114,10 @@ enum Control
 	BACK;
 	PAUSE;
 	FULLSCREEN;
-	PEACE;
+	TAUNT_1;
+	TAUNT_2;
+	TAUNT_3;
+	TAUNT_4;
 }
 
 enum KeyboardScheme
@@ -154,7 +163,10 @@ class Controls extends FlxActionSet
 	var _pause = new FlxActionDigital(Action.PAUSE);
 	var _reset = new FlxActionDigital(Action.RESET);
 	var _fullscreen = new FlxActionDigital(Action.FULLSCREEN);
-	var _peace = new FlxActionDigital(Action.PEACE);
+	var _taunt_1 = new FlxActionDigital(Action.TAUNT_1);
+	var _taunt_2 = new FlxActionDigital(Action.TAUNT_2);
+	var _taunt_3 = new FlxActionDigital(Action.TAUNT_3);
+	var _taunt_4 = new FlxActionDigital(Action.TAUNT_4);
 
 	#if (haxe >= "4.0.0")
 	var byName:Map<String, FlxActionDigital> = [];
@@ -310,10 +322,25 @@ class Controls extends FlxActionSet
 	inline function get_FULLSCREEN()
 		return _fullscreen.check();
 
-	public var PEACE(get, never):Bool;
+	public var TAUNT_1(get, never):Bool;
 
-	inline function get_PEACE()
-		return _peace.check();
+	inline function get_TAUNT_1()
+		return _taunt_1.check();
+
+	public var TAUNT_2(get, never):Bool;
+
+	inline function get_TAUNT_2()
+		return _taunt_2.check();
+
+	public var TAUNT_3(get, never):Bool;
+
+	inline function get_TAUNT_3()
+		return _taunt_3.check();
+
+	public var TAUNT_4(get, never):Bool;
+
+	inline function get_TAUNT_4()
+		return _taunt_4.check();
 
 	#if (haxe >= "4.0.0")
 	public function new(name, scheme = None)
@@ -349,7 +376,10 @@ class Controls extends FlxActionSet
 		add(_pause);
 		add(_reset);
 		add(_fullscreen);
-		add(_peace);
+		add(_taunt_1);
+		add(_taunt_2);
+		add(_taunt_3);
+		add(_taunt_4);
 
 		for (action in digitalActions)
 			byName[action.name] = action;
@@ -390,7 +420,10 @@ class Controls extends FlxActionSet
 		add(_pause);
 		add(_reset);
 		add(_fullscreen);
-		add(_peace);
+		add(_taunt_1);
+		add(_taunt_2);
+		add(_taunt_3);
+		add(_taunt_4);
 
 		for (action in digitalActions)
 			byName[action.name] = action;
@@ -449,7 +482,10 @@ class Controls extends FlxActionSet
 			case PAUSE: _pause;
 			case RESET: _reset;
 			case FULLSCREEN: _fullscreen;
-			case PEACE: _peace;
+			case TAUNT_1: _taunt_1;
+			case TAUNT_2: _taunt_2;
+			case TAUNT_3: _taunt_3;
+			case TAUNT_4: _taunt_4;
 		}
 	}
 
@@ -511,8 +547,14 @@ class Controls extends FlxActionSet
 				func(_reset, JUST_PRESSED);
 			case FULLSCREEN:
 				func(_fullscreen, JUST_PRESSED);
-			case PEACE:
-				func(_peace, JUST_PRESSED);
+			case TAUNT_1:
+				func(_taunt_1, JUST_PRESSED);
+			case TAUNT_2:
+				func(_taunt_2, JUST_PRESSED);
+			case TAUNT_3:
+				func(_taunt_3, JUST_PRESSED);
+			case TAUNT_4:
+				func(_taunt_4, JUST_PRESSED);
 		}
 	}
 
@@ -682,7 +724,10 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.PAUSE, keysMap.get('pause'));
 				inline bindKeys(Control.RESET, keysMap.get('reset'));
 				inline bindKeys(Control.FULLSCREEN, keysMap.get('ui_fullscreen'));
-				inline bindKeys(Control.PEACE, keysMap.get('peace_sign'));
+				inline bindKeys(Control.TAUNT_1, keysMap.get('taunt_1'));
+				inline bindKeys(Control.TAUNT_2, keysMap.get('taunt_2'));
+				inline bindKeys(Control.TAUNT_3, keysMap.get('taunt_3'));
+				inline bindKeys(Control.TAUNT_4, keysMap.get('taunt_4'));
 			case Duo(true):
 				inline bindKeys(Control.UI_UP, [W]);
 				inline bindKeys(Control.UI_DOWN, [S]);
@@ -697,7 +742,10 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.PAUSE, [ONE]);
 				inline bindKeys(Control.RESET, [R]);
 				inline bindKeys(Control.FULLSCREEN, [F11]);
-				inline bindKeys(Control.PEACE, [V]);
+				inline bindKeys(Control.TAUNT_1, [V]);
+				inline bindKeys(Control.TAUNT_2, [B]);
+				inline bindKeys(Control.TAUNT_3, [N]);
+				inline bindKeys(Control.TAUNT_4, [M]);
 			case Duo(false):
 				inline bindKeys(Control.UI_UP, [FlxKey.UP]);
 				inline bindKeys(Control.UI_DOWN, [FlxKey.DOWN]);
@@ -712,7 +760,10 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.PAUSE, [ENTER]);
 				inline bindKeys(Control.RESET, [BACKSPACE]);
 				inline bindKeys(Control.FULLSCREEN, [F11]);
-				inline bindKeys(Control.PEACE, [V]);
+				inline bindKeys(Control.TAUNT_1, [V]);
+				inline bindKeys(Control.TAUNT_2, [B]);
+				inline bindKeys(Control.TAUNT_3, [N]);
+				inline bindKeys(Control.TAUNT_4, [M]);
 			case None: // nothing
 			case Custom: // nothing
 		}
@@ -733,7 +784,10 @@ class Controls extends FlxActionSet
 				bindKeys(Control.PAUSE, [P, ENTER, ESCAPE]);
 				bindKeys(Control.RESET, [R]);
 				bindKeys(Control.FULLSCREEN, [F11]);
-				bindKeys(Control.PEACE, [V]);
+				bindKeys(Control.TAUNT_1, [V]);
+				bindKeys(Control.TAUNT_2, [B]);
+				bindKeys(Control.TAUNT_3, [N]);
+				bindKeys(Control.TAUNT_4, [M]);
 			case Duo(true):
 				bindKeys(Control.UI_UP, [W]);
 				bindKeys(Control.UI_DOWN, [S]);
@@ -748,7 +802,10 @@ class Controls extends FlxActionSet
 				bindKeys(Control.PAUSE, [ONE]);
 				bindKeys(Control.RESET, [R]);
 				bindKeys(Control.FULLSCREEN, [F11]);
-				bindKeys(Control.PEACE, [V]);
+				bindKeys(Control.TAUNT_1, [V]);
+				bindKeys(Control.TAUNT_2, [B]);
+				bindKeys(Control.TAUNT_3, [N]);
+				bindKeys(Control.TAUNT_4, [M]);
 			case Duo(false):
 				bindKeys(Control.UI_UP, [FlxKey.UP]);
 				bindKeys(Control.UI_DOWN, [FlxKey.DOWN]);
@@ -763,7 +820,10 @@ class Controls extends FlxActionSet
 				bindKeys(Control.PAUSE, [ENTER]);
 				bindKeys(Control.RESET, [BACKSPACE]);
 				bindKeys(Control.FULLSCREEN, [F11]);
-				bindKeys(Control.PEACE, [V]);
+				bindKeys(Control.TAUNT_1, [V]);
+				bindKeys(Control.TAUNT_2, [B]);
+				bindKeys(Control.TAUNT_3, [N]);
+				bindKeys(Control.TAUNT_4, [M]);
 			case None: // nothing
 			case Custom: // nothing
 		}

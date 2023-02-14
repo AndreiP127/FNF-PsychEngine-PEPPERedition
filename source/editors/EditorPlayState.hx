@@ -504,7 +504,7 @@ class EditorPlayState extends MusicBeatState
 
 		keyShit();
 		scoreTxt.text = 'Hits: ' + songHits + ' | Misses: ' + songMisses;
-		sectionTxt.text = 'Beat: ' + curSection;
+		sectionTxt.text = 'Section: ' + curSection; // Beat? BEAT?  B E A T ?  ~ Andrei_P
 		beatTxt.text = 'Beat: ' + curBeat;
 		stepTxt.text = 'Step: ' + curStep;
 		super.update(elapsed);
