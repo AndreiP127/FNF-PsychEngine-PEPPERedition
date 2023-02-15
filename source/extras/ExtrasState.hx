@@ -39,9 +39,13 @@ class ExtrasState extends MusicBeatState
 			case 'Note Colors':
 				openSubState(new options.NotesSubState()); // I prefer it being here. ~ Andrei_P
 			case 'Soundtrack':
-				trace('In progress, sorry.'); // This'll be a huge thing, holy shit how I wanted to know real coding... ~ Andrei_P
+				trace('Coming Soon...'); // This'll be a huge thing, holy shit how I wanted to know real coding... ~ Andrei_P
+				FlxG.sound.play(Paths.sound('cancelMenu'));
 			case 'Editor State':
 				LoadingState.loadAndSwitchState(new editors.MasterEditorMenu());
+				#if desktop
+					openfl.Lib.application.window.title = "Psych Engine - PEPPER Edition";
+				#end
 			case 'Links':
 				LoadingState.loadAndSwitchState(new extras.LinksSubState()); // Supposed to be a SubState, but HaxeFlixel is a bitch. ~ Andrei_P
 		}

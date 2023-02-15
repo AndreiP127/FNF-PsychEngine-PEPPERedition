@@ -72,7 +72,10 @@ class ClientPrefs {
 		'note_up'		=> [W, UP],
 		'note_right'	=> [D, RIGHT],
 		
-		'peace_sign'	=> [V, NONE],
+		'taunt_1'	=> [V, NONE],
+		'taunt_2'	=> [B, NONE],
+		'taunt_3'	=> [N, NONE],
+		'taunt_4'	=> [M, NONE],
 
 		'ui_left'		=> [A, LEFT],
 		'ui_down'		=> [S, DOWN],

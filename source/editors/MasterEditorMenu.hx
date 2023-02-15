@@ -37,6 +37,10 @@ class MasterEditorMenu extends MusicBeatState
 
 	override function create()
 	{
+		#if desktop
+			openfl.Lib.application.window.title = "Psych Engine - PEPPER Edition";
+		#end
+
 		FlxG.camera.bgColor = FlxColor.BLACK;
 		#if desktop
 		// Updating Discord Rich Presence
@@ -112,6 +116,9 @@ class MasterEditorMenu extends MusicBeatState
 		if (controls.BACK)
 		{
 			MusicBeatState.switchState(new extras.ExtrasState());
+			#if desktop
+				openfl.Lib.application.window.title = "Friday Night Funkin'";
+			#end
 		}
 
 		if (controls.ACCEPT)
