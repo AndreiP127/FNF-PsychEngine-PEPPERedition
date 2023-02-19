@@ -44,7 +44,7 @@ class ExtrasState extends MusicBeatState
 			case 'Editor State':
 				LoadingState.loadAndSwitchState(new editors.MasterEditorMenu());
 				#if desktop
-					openfl.Lib.application.window.title = "Psych Engine - PEPPER Edition";
+					openfl.Lib.application.window.title = Main.engineTitle;
 				#end
 			case 'Links':
 				LoadingState.loadAndSwitchState(new extras.LinksSubState()); // Supposed to be a SubState, but HaxeFlixel is a bitch. ~ Andrei_P

@@ -60,7 +60,7 @@ class FreeplayState extends MusicBeatState
 		WeekData.reloadWeekFiles(false);
 
 		#if desktop
-		openfl.Lib.application.window.title = "Friday Night Funkin'";
+		openfl.Lib.application.window.title = Main.gameTitle;
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
 		#end

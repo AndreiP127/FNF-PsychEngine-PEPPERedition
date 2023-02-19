@@ -86,6 +86,8 @@ class TitleState extends MusicBeatState
 
 	override public function create():Void
 	{
+		openfl.Lib.application.window.title = Main.gameTitle;
+		
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 

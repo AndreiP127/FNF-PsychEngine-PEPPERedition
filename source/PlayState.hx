@@ -2418,7 +2418,7 @@ class PlayState extends MusicBeatState
 		}
 
 		#if desktop
-		openfl.Lib.application.window.title = ("Friday Night Funkin' - " + SONG.song + ' [' + storyDifficultyText + ']');
+		openfl.Lib.application.window.title = (Main.gameTitle + " - " + SONG.song + ' [' + storyDifficultyText + ']');
 		// Updating Discord Rich Presence (with Time Left)
 		DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), true, songLength);
 		#end
@@ -3135,7 +3135,7 @@ class PlayState extends MusicBeatState
 				cancelMusicFadeTween();
 				MusicBeatState.switchState(new CharacterEditorState(SONG.player2));
 				#if desktop
-					openfl.Lib.application.window.title = "Psych Engine - PEPPER Edition";
+					openfl.Lib.application.window.title = Main.engineTitle;
 				#end
 			}
 		#end
@@ -3419,7 +3419,7 @@ class PlayState extends MusicBeatState
 
 		#if desktop
 		DiscordClient.changePresence("Chart Editor", null, null, true);
-		openfl.Lib.application.window.title = "Friday Night Funkin'";
+		openfl.Lib.application.window.title = Main.gameTitle;
 		#end
 	}
 

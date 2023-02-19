@@ -308,7 +308,7 @@ class PauseSubState extends MusicBeatSubstate
 					MusicBeatState.switchState(new CharacterEditorState(PlayState.SONG.player2));
 					PlayState.chartingMode = true;
 					#if desktop
-						openfl.Lib.application.window.title = "Psych Engine - PEPPER Edition";
+						openfl.Lib.application.window.title = Main.engineTitle;
 					#end
 
 				case "Leave Charting Mode":

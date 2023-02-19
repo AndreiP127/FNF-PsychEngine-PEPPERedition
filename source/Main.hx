@@ -30,6 +30,9 @@ using StringTools;
 
 class Main extends Sprite
 {
+	public static var gameTitle:String = "Friday Night Funkin'"; // Change Game Window Title here!!!
+	public static var engineTitle:String = "Psych Engine - PEPPER Edition";
+
 	var game = {
 		width: 1280, // WINDOW width
 		height: 720, // WINDOW height

@@ -1530,7 +1530,7 @@ class ChartingState extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		#if desktop
-			openfl.Lib.application.window.title = ("Psych Engine - PEPPER Edition - " + currentSongName);
+			openfl.Lib.application.window.title = (Main.engineTitle + " - " + currentSongName);
 		#end
 
 		curStep = recalculateSteps();
@@ -1703,7 +1703,7 @@ class ChartingState extends MusicBeatState
 
 			if (FlxG.keys.justPressed.BACKSPACE) {
 				#if desktop
-					openfl.Lib.application.window.title = "Psych Engine - PEPPER Edition";
+					openfl.Lib.application.window.title = Main.engineTitle;
 				#end
 				PlayState.chartingMode = false;
 				MusicBeatState.switchState(new editors.MasterEditorMenu());

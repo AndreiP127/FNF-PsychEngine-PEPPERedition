@@ -52,12 +52,6 @@ class OptionsState extends MusicBeatState
 		}
 	}
 
-	/*public function new(goToPlayState:Bool = false)
-		{
-			super();
-			this.goToPlayState = goToPlayState;
-		}*/
-
 	var selectorLeft:Alphabet;
 	var selectorRight:Alphabet;
 
